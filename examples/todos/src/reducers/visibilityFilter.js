@@ -1,12 +1,12 @@
-import { VisibilityFilters } from '../actions'
+import {VisibilityFilter} from "../actions/index";
 
-const visibilityFilter = (state = VisibilityFilters.SHOW_ALL, action) => {
-  switch (action.type) {
+const todoList = (state=VisibilityFilter.SHOW_ALL,action)=>{
+  switch (action.type){
     case 'SET_VISIBILITY_FILTER':
-      return action.filter
+      return action.filter;
     default:
-      return state
+      return state;
   }
-}
+};
 
-export default visibilityFilter
+export default todoList;

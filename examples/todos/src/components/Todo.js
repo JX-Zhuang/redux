@@ -1,21 +1,24 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React ,{Component} from 'react';
+import PropTypes from 'prop-types';
 
-const Todo = ({ onClick, completed, text }) => (
-  <li
-    onClick={onClick}
-    style={{
-      textDecoration: completed ? 'line-through' : 'none'
-    }}
-  >
-    {text}
-  </li>
-)
-
-Todo.propTypes = {
-  onClick: PropTypes.func.isRequired,
-  completed: PropTypes.bool.isRequired,
-  text: PropTypes.string.isRequired
+class Todo extends Component{
+  render(){
+    const {complete,text,onClick} = this.props;
+    return (
+      <li
+        onClick={onClick}
+        style={{
+          textDecoration:complete?'line-through':'none'
+        }}
+      >
+        {text}
+      </li>
+    );
+  }
 }
-
-export default Todo
+Todo.propTypes={
+  onClick:PropTypes.func,
+  complete:PropTypes.bool,
+  text:PropTypes.string
+};
+export default Todo;

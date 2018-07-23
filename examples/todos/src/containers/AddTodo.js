@@ -1,27 +1,32 @@
-import React from 'react'
-import { connect } from 'react-redux'
-import { addTodo } from '../actions'
-
-const AddTodo = ({ dispatch }) => {
-  let input
-
-  return (
-    <div>
-      <form onSubmit={e => {
-        e.preventDefault()
-        if (!input.value.trim()) {
-          return
-        }
-        dispatch(addTodo(input.value))
-        input.value = ''
-      }}>
-        <input ref={node => input = node} />
-        <button type="submit">
-          Add Todo
-        </button>
-      </form>
-    </div>
-  )
+import React ,{Component} from 'react';
+import {connect} from 'react-redux';
+import {addTodo,thunkAddTodo} from "../actions";
+class AppTodo extends Component{
+  addTodo(){
+    const {addTodo} = this.props;
+    addTodo(this.input.value);
+    this.input.value = '';
+  }
+  thunkAddTodo(){
+    const {thunkAddTodo} = this.props;
+    thunkAddTodo(this.input.value);
+    this.input.value = '';
+  }
+  render(){
+    return (
+      <div>
+        <input type="text" ref={e=>this.input=e}/>
+        <button onClick={()=>this.addTodo()}>addTodo</button>
+        <button onClick={()=>this.thunkAddTodo()}>thunk addTodo</button>
+      </div>
+    );
+  }
 }
+const mapDispatchToProps = dispatch=>({
+  addTodo:text=>dispatch(addTodo(text)),
+  thunkAddTodo:text=>dispatch(thunkAddTodo(text)),
+});
+const mapStateToProp = ()=>({
 
-export default connect()(AddTodo)
+});
+export default connect(mapStateToProp,mapDispatchToProps)(AppTodo);
